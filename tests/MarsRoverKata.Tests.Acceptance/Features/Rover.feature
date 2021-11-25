@@ -23,3 +23,12 @@ A mars rover that navigates on a grid.
         Then the X coordinate should be 0
         And the Y coordinate should be 0
         And the direction should be "N"
+    
+    @Acceptance
+    Scenario: Given a grid with an obstacle at 0:3, input "MMMM" gives 0:2 facing north with obstacle warning
+        Given rover is initialized
+        And obstacle stands at "0":"3"
+        When rover receives input "MMMM"
+        Then the X coordinate should be 0
+        And the Y coordinate should be 2
+        And the direction should be "N"

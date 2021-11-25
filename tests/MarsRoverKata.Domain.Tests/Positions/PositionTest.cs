@@ -1,3 +1,4 @@
+using System.Drawing;
 using FluentAssertions;
 using MarsRoverKata.Domain.Grids;
 using MarsRoverKata.Domain.Positions;
@@ -13,31 +14,30 @@ namespace MarsRoverKata.Domain.Tests.Positions
         public PositionTest()
         {
             mockGrid = new Mock<IGrid>();
-            mockGrid.SetupGet(grid => grid.Height).Returns(5);
-            mockGrid.SetupGet(grid => grid.Width).Returns(5);
+            mockGrid.SetupGet(grid => grid.MaxPoint).Returns(new Point(5, 5));
         }
 
         [Fact]
         public void X_ShouldReturnZero_GivenPositionIsDefault()
         {
             Position position = new(mockGrid.Object);
-            position.X.Should().Be(0);
+            position.Location.X.Should().Be(0);
         }
 
         [Fact]
         public void Y_ShouldReturnZero_GivenPositionIsDefault()
         {
             Position position = new(mockGrid.Object);
-            position.Y.Should().Be(0);
+            position.Location.Y.Should().Be(0);
         }
 
         [Fact]
         public void IncreaseX_ShouldIncreaseXValue()
         {
             Position position = new(mockGrid.Object);
-            int initialPosition = position.X;
+            int initialPosition = position.Location.X;
             position.IncreaseX();
-            position.X.Should().Be(++initialPosition);
+            position.Location.X.Should().Be(++initialPosition);
         }
 
         [Fact]
@@ -49,16 +49,16 @@ namespace MarsRoverKata.Domain.Tests.Positions
             position.IncreaseX();
             position.IncreaseX();
             position.IncreaseX();
-            position.X.Should().Be(0);
+            position.Location.X.Should().Be(0);
         }
 
         [Fact]
         public void IncreaseY_ShouldIncreaseYValue()
         {
             Position position = new(mockGrid.Object);
-            int initialPosition = position.Y;
+            int initialPosition = position.Location.Y;
             position.IncreaseY();
-            position.Y.Should().Be(++initialPosition);
+            position.Location.Y.Should().Be(++initialPosition);
         }
 
         [Fact]
@@ -70,7 +70,7 @@ namespace MarsRoverKata.Domain.Tests.Positions
             position.IncreaseY();
             position.IncreaseY();
             position.IncreaseY();
-            position.Y.Should().Be(0);
+            position.Location.Y.Should().Be(0);
         }
 
         [Fact]
@@ -78,9 +78,9 @@ namespace MarsRoverKata.Domain.Tests.Positions
         {
             Position position = new(mockGrid.Object);
             position.IncreaseX();
-            int initialPosition = position.X;
+            int initialPosition = position.Location.X;
             position.DecreaseX();
-            position.X.Should().Be(--initialPosition);
+            position.Location.X.Should().Be(--initialPosition);
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace MarsRoverKata.Domain.Tests.Positions
         {
             Position position = new(mockGrid.Object);
             position.DecreaseX();
-            position.X.Should().Be(mockGrid.Object.Width - 1);
+            position.Location.X.Should().Be(mockGrid.Object.MaxPoint.X - 1);
         }
 
         [Fact]
@@ -96,9 +96,9 @@ namespace MarsRoverKata.Domain.Tests.Positions
         {
             Position position = new(mockGrid.Object);
             position.IncreaseY();
-            int initialPosition = position.Y;
+            int initialPosition = position.Location.Y;
             position.DecreaseY();
-            position.Y.Should().Be(--initialPosition);
+            position.Location.Y.Should().Be(--initialPosition);
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace MarsRoverKata.Domain.Tests.Positions
         {
             Position position = new(mockGrid.Object);
             position.DecreaseY();
-            position.Y.Should().Be(mockGrid.Object.Height - 1);
+            position.Location.Y.Should().Be(mockGrid.Object.MaxPoint.Y - 1);
         }
     }
 }

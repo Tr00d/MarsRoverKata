@@ -1,10 +1,11 @@
+using System.Drawing;
+
 namespace MarsRoverKata.Domain.Positions
 {
     public interface IPosition
     {
-        int X { get; }
-
-        int Y { get; }
+        Point Location { get; }
+        
         void IncreaseX();
 
         void IncreaseY();

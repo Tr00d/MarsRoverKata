@@ -1,9 +1,9 @@
+using System.Drawing;
+
 namespace MarsRoverKata.Domain.Grids
 {
     public interface IGrid
     {
-        int Width { get; }
-
-        int Height { get; }
+        Point MaxPoint { get; }
     }
 }

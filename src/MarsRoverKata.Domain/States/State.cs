@@ -24,8 +24,8 @@ namespace MarsRoverKata.Domain.States
 
         public string GetDirection() => direction.Cardinal;
 
-        public int GetXCoordinate() => position.X;
+        public int GetXCoordinate() => position.Location.X;
 
-        public int GetYCoordinate() => position.Y;
+        public int GetYCoordinate() => position.Location.Y;
     }
 }

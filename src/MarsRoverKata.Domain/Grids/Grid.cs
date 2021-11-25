@@ -1,14 +1,14 @@
+using System.Drawing;
+
 namespace MarsRoverKata.Domain.Grids
 {
     public class Grid : IGrid
     {
-        public Grid(int height, int width)
+        public Grid(Point maxPoint)
         {
-            Height = height;
-            Width = width;
+            this.MaxPoint = maxPoint;
         }
 
-        public int Width { get; }
-        public int Height { get; }
+        public Point MaxPoint { get; }
     }
 }

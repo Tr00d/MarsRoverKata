@@ -1,3 +1,4 @@
+using System.Drawing;
 using MarsRoverKata.Domain;
 using MarsRoverKata.Domain.Directions;
 using MarsRoverKata.Domain.Grids;
@@ -12,7 +13,7 @@ namespace MarsRoverKata.Tests.Acceptance.Drivers
 
         public void InitializeRover()
         {
-            rover = new Rover(new State(new NorthDirection(), new Position(new Grid(10, 10))));
+            rover = new Rover(new State(new NorthDirection(), new Position(new Grid(new Point(10, 10)))));
         }
 
         public void SendInput(string input) => rover.Execute(input);
@@ -22,5 +23,10 @@ namespace MarsRoverKata.Tests.Acceptance.Drivers
         public int GetRoverXCoordinate() => rover.X;
 
         public int GetRoverYCoordinate() => rover.Y;
+
+        public void InitializeObstacle(int x, int y)
+        {
+            
+        }
     }
 }
