@@ -1,3 +1,5 @@
+using MarsRoverKata.Domain.Directions;
+
 namespace MarsRoverKata.Domain
 {
     public interface IRoverState
@@ -8,7 +10,7 @@ namespace MarsRoverKata.Domain
 
         void MoveForward();
 
-        RoverDirection Direction { get; }
+        IDirection Direction { get; }
         
         RoverPosition Position { get; }
     }

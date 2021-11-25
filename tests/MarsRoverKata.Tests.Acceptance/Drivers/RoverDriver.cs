@@ -14,8 +14,10 @@ namespace MarsRoverKata.Tests.Acceptance.Drivers
 
         public void SendInput(string input) => this.rover.Execute(input);
 
-        public RoverPosition GetRoverPosition() => rover.Position;
+        public string GetRoverDirection() => rover.Direction;
 
-        public RoverDirection GetRoverDirection() => rover.Direction;
+        public int GetRoverXCoordinate() => rover.X;
+
+        public int GetRoverYCoordinate() => rover.Y;
     }
 }

@@ -1,51 +1,33 @@
 using System;
 using System.Collections.Generic;
 using Dawn;
+using MarsRoverKata.Domain.Directions;
 
 namespace MarsRoverKata.Domain
 {
     public class RoverState : IRoverState
     {
-        private readonly Dictionary<string, string> rotationsLeft = new Dictionary<string, string>()
-        {
-            { "N", "W" },
-            { "W", "S" },
-            { "S", "E" },
-            { "E", "N" },
-        };
-        
-        private readonly Dictionary<string, string> rotationsRight = new Dictionary<string, string>()
-        {
-            { "N", "E" },
-            { "W", "N" },
-            { "S", "W" },
-            { "E", "S" },
-        };
-
         public RoverState()
         {
-            this.Direction = new RoverDirection();
+            this.Direction = new NorthDirection();
             this.Position = new RoverPosition();
         }
 
-        public RoverState(RoverDirection direction, RoverPosition position)
+        public RoverState(IDirection direction, RoverPosition position)
             : this()
         {
             this.Direction = Guard.Argument(direction, nameof(direction)).NotNull().Value;
             this.Position = Guard.Argument(position, nameof(position)).NotNull().Value;
         }
         
-        public RoverDirection Direction { get; private set; }
+        public IDirection Direction { get; private set; }
         
         public RoverPosition Position { get; private set; }
 
-        public void RotateLeft() => this.Direction = new RoverDirection(rotationsLeft[this.Direction.Direction]);
+        public void RotateLeft() => this.Direction = this.Direction.GetLeftDirection();
 
-        public void RotateRight() => this.Direction = new RoverDirection(rotationsRight[this.Direction.Direction]);
+        public void RotateRight() => this.Direction = this.Direction.GetRightDirection();
 
-        public void MoveForward()
-        {
-            this.Position = new RoverPosition(0, 1);
-        }
+        public void MoveForward() => this.Position = this.Direction.MoveForward(this.Position);
     }
 }

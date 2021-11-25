@@ -27,8 +27,10 @@ namespace MarsRoverKata.Domain
 
         public void Execute(string input) => input.ToList().ForEach(command => actions[command]());
 
-        public RoverDirection Direction => this.state.Direction;
+        public string Direction => this.state.Direction.Cardinal;
 
-        public RoverPosition Position => this.state.Position;
+        public int X => this.state.Position.X;
+
+        public int Y => this.state.Position.Y;
     }
 }

@@ -19,13 +19,13 @@ namespace MarsRoverKata.Tests.Acceptance.Steps
         public void InitializeRover() => driver.InitializeRover();
 
         [Then(@"the direction should be ""(.*)""")]
-        public void VerifyDirection(string direction) => driver.GetRoverDirection().Direction.Should().Be(direction);
+        public void VerifyDirection(string direction) => driver.GetRoverDirection().Should().Be(direction);
 
         [Then(@"the X coordinate should be (.*)")]
-        public void VerifyXCoordinate(int coordinate) => driver.GetRoverPosition().X.Should().Be(coordinate);
+        public void VerifyXCoordinate(int coordinate) => driver.GetRoverXCoordinate().Should().Be(coordinate);
 
         [Then(@"the Y coordinate should be (.*)")]
-        public void VerifyYCoordinate(int coordinate) => driver.GetRoverPosition().Y.Should().Be(coordinate);
+        public void VerifyYCoordinate(int coordinate) => driver.GetRoverYCoordinate().Should().Be(coordinate);
 
         [When(@"rover receives input ""(.*)""")]
         public void SendInput(string input) => this.driver.SendInput(input);

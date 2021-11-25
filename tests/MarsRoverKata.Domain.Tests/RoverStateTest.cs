@@ -2,6 +2,8 @@ using System;
 using AutoFixture;
 using FluentAssertions;
 using LanguageExt;
+using MarsRoverKata.Domain.Directions;
+using Moq;
 using Xunit;
 
 namespace MarsRoverKata.Domain.Tests
@@ -9,13 +11,17 @@ namespace MarsRoverKata.Domain.Tests
     public class RoverStateTest
     {
         private readonly Fixture fixture;
+        private readonly Mock<IDirection> mockDirection;
+
         public RoverStateTest()
         {
             fixture = new Fixture();
+            mockDirection = new Mock<IDirection>();
         }
-        
+
         [Fact]
-        public void State_ShouldHaveNorthDirection_GivenIsDefault() => new RoverState().Direction.Direction.Should().Be("N");
+        public void State_ShouldHaveNorthDirection_GivenIsDefault() =>
+            new RoverState().Direction.Cardinal.Should().Be("N");
 
         [Fact]
         public void State_ShouldHaveZeroAsX_GivenIsDefault() => new RoverState().Position.X.Should().Be(0);
@@ -23,41 +29,36 @@ namespace MarsRoverKata.Domain.Tests
         [Fact]
         public void State_ShouldHaveZeroAsY_GivenIsDefault() => new RoverState().Position.Y.Should().Be(0);
 
-        [Theory]
-        [InlineData("N", "W")]
-        [InlineData("W", "S")]
-        [InlineData("S", "E")]
-        [InlineData("E", "N")]
-        public void RotateLeft_ShouldModifyDirectionToLeftCardinal(string startingDirection, string endingDirection)
+        [Fact]
+        public void RotateLeft_ShouldModifyDirectionToLeftDirection()
         {
-            RoverDirection direction = new RoverDirection(startingDirection);
-            RoverState state = new RoverState(direction, this.fixture.Create<RoverPosition>());
+            IDirection leftDirection = new Mock<IDirection>().Object;
+            this.mockDirection.Setup(direction => direction.GetLeftDirection()).Returns(leftDirection);
+            RoverState state = new RoverState(this.mockDirection.Object, this.fixture.Create<RoverPosition>());
             state.RotateLeft();
-            state.Direction.Direction.Should().Be(endingDirection);
-        }
-        
-        [Theory]
-        [InlineData("N", "E")]
-        [InlineData("W", "N")]
-        [InlineData("S", "W")]
-        [InlineData("E", "S")]
-        public void RotateLeft_ShouldModifyDirectionToRightCardinal(string startingDirection, string endingDirection)
-        {
-            RoverDirection direction = new RoverDirection(startingDirection);
-            RoverState state = new RoverState(direction, this.fixture.Create<RoverPosition>());
-            state.RotateRight();
-            state.Direction.Direction.Should().Be(endingDirection);
+            state.Direction.Should().Be(leftDirection);
         }
 
-        [Theory]
-        [InlineData("N", 0, 0, 0, 1)]
-        public void MoveForward_ShouldUpdateCoordinate(string direction, int startingX, int startingY, int endingX, int endingY)
+        [Fact]
+
+        public void RotateLeft_ShouldModifyDirectionToRightDirection()
         {
-            RoverState state = new RoverState(new RoverDirection(direction),
-                new RoverPosition(startingX, startingY));
+            IDirection rightDirection = new Mock<IDirection>().Object;
+            this.mockDirection.Setup(direction => direction.GetRightDirection()).Returns(rightDirection);
+            RoverState state = new RoverState(this.mockDirection.Object, this.fixture.Create<RoverPosition>());
+            state.RotateRight();
+            state.Direction.Should().Be(rightDirection);
+        }
+
+        [Fact]
+        public void MoveForward_ShouldUpdateCoordinate()
+        {
+            RoverPosition position = this.fixture.Create<RoverPosition>();
+            RoverPosition newPosition = this.fixture.Create<RoverPosition>();
+            this.mockDirection.Setup(direction => direction.MoveForward(position)).Returns(newPosition);
+            RoverState state = new RoverState(this.mockDirection.Object, position);
             state.MoveForward();
-            state.Position.X.Should().Be(endingX);
-            state.Position.Y.Should().Be(endingY);
+            state.Position.Should().Be(newPosition);
         }
     }
 }
