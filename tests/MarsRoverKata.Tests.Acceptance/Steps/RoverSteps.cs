@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using MarsRoverKata.Tests.Acceptance.Drivers;
 using TechTalk.SpecFlow;
@@ -15,27 +16,18 @@ namespace MarsRoverKata.Tests.Acceptance.Steps
         }
 
         [Given(@"rover is initialized")]
-        public void InitializeRover()
-        {
-            driver.InitializeRover();
-        }
+        public void InitializeRover() => driver.InitializeRover();
 
         [Then(@"the direction should be ""(.*)""")]
-        public void ThenTheDirectionShouldBe(string direction)
-        {
-            driver.GetRoverState().Direction.Should().Be(direction);
-        }
+        public void VerifyDirection(string direction) => driver.GetRoverDirection().Direction.Should().Be(direction);
 
         [Then(@"the X coordinate should be (.*)")]
-        public void ThenTheXCoordinateShouldBe(int coordinate)
-        {
-            driver.GetRoverState().X.Should().Be(coordinate);
-        }
+        public void VerifyXCoordinate(int coordinate) => driver.GetRoverPosition().X.Should().Be(coordinate);
 
         [Then(@"the Y coordinate should be (.*)")]
-        public void ThenTheYCoordinateShouldBe(int coordinate)
-        {
-            driver.GetRoverState().Y.Should().Be(coordinate);
-        }
+        public void VerifyYCoordinate(int coordinate) => driver.GetRoverPosition().Y.Should().Be(coordinate);
+
+        [When(@"rover receives input ""(.*)""")]
+        public void SendInput(string input) => this.driver.SendInput(input);
     }
 }
