@@ -5,7 +5,7 @@ namespace MarsRoverKata.Domain.Positions
     public interface IPosition
     {
         Point Location { get; }
-        
+
         void IncreaseX();
 
         void IncreaseY();

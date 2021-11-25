@@ -6,9 +6,8 @@ namespace MarsRoverKata.Domain.States
 {
     public class State : IState
     {
-        private IDirection direction;
-
         private readonly IPosition position;
+        private IDirection direction;
 
         public State(IDirection direction, IPosition position)
         {

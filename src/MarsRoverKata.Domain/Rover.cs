@@ -28,25 +28,25 @@ namespace MarsRoverKata.Domain
         public int X => state.GetXCoordinate();
 
         public int Y => state.GetYCoordinate();
-        
+
         public bool HasObstacleWarning { get; private set; }
 
-        public void Execute(string input) => input.ToList().ForEach(this.ExecuteCommand);
+        public void Execute(string input) => input.ToList().ForEach(ExecuteCommand);
 
         private void ExecuteCommand(char command)
         {
-            if (this.HasObstacleWarning)
+            if (HasObstacleWarning)
             {
                 return;
             }
-            
+
             try
             {
                 actions[command]();
             }
-            catch (ObstacleException exception)
+            catch (ObstacleException)
             {
-                this.HasObstacleWarning = true;
+                HasObstacleWarning = true;
             }
         }
     }

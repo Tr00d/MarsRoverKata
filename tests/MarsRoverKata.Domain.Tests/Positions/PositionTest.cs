@@ -11,12 +11,12 @@ namespace MarsRoverKata.Domain.Tests.Positions
 {
     public class PositionTest
     {
-        private Fixture fixture;
         private readonly Mock<IGrid> mockGrid;
+        private Fixture fixture;
 
         public PositionTest()
         {
-            this.fixture = new Fixture();
+            fixture = new Fixture();
             mockGrid = new Mock<IGrid>();
             mockGrid.SetupGet(grid => grid.MaxPoint).Returns(new Point(5, 5));
         }
@@ -48,16 +48,16 @@ namespace MarsRoverKata.Domain.Tests.Positions
         public void IncreaseX_ShouldThrowObstacleException_GivenNextPositionContainsObstacle()
         {
             Point obstacleLocation = new Point(1, 0);
-            IEnumerable<Obstacle> obstacles = new List<Obstacle>()
+            IEnumerable<Obstacle> obstacles = new List<Obstacle>
             {
-                new Obstacle(obstacleLocation)
+                new(obstacleLocation)
             };
             mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
             Position position = new(mockGrid.Object);
             ObstacleException exception = Assert.Throws<ObstacleException>(() => position.IncreaseX());
             exception.ObstacleLocation.Should().Be(obstacleLocation);
         }
-        
+
         [Fact]
         public void IncreaseX_ShouldSetZero_GivenXWasGridLimit()
         {
@@ -78,14 +78,14 @@ namespace MarsRoverKata.Domain.Tests.Positions
             position.IncreaseY();
             position.Location.Y.Should().Be(++initialPosition);
         }
-        
+
         [Fact]
         public void IncreaseY_ShouldThrowObstacleException_GivenNextPositionContainsObstacle()
         {
             Point obstacleLocation = new Point(0, 1);
-            IEnumerable<Obstacle> obstacles = new List<Obstacle>()
+            IEnumerable<Obstacle> obstacles = new List<Obstacle>
             {
-                new Obstacle(obstacleLocation)
+                new(obstacleLocation)
             };
             mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
             Position position = new(mockGrid.Object);
@@ -114,14 +114,14 @@ namespace MarsRoverKata.Domain.Tests.Positions
             position.DecreaseX();
             position.Location.X.Should().Be(--initialPosition);
         }
-        
+
         [Fact]
         public void DecreaseX_ShouldThrowObstacleException_GivenNextPositionContainsObstacle()
         {
             Point obstacleLocation = new Point(0, 0);
-            IEnumerable<Obstacle> obstacles = new List<Obstacle>()
+            IEnumerable<Obstacle> obstacles = new List<Obstacle>
             {
-                new Obstacle(obstacleLocation)
+                new(obstacleLocation)
             };
             mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
             Position position = new(mockGrid.Object);
@@ -147,14 +147,14 @@ namespace MarsRoverKata.Domain.Tests.Positions
             position.DecreaseY();
             position.Location.Y.Should().Be(--initialPosition);
         }
-        
+
         [Fact]
         public void DecreaseY_ShouldThrowObstacleException_GivenNextPositionContainsObstacle()
         {
             Point obstacleLocation = new Point(0, 0);
-            IEnumerable<Obstacle> obstacles = new List<Obstacle>()
+            IEnumerable<Obstacle> obstacles = new List<Obstacle>
             {
-                new Obstacle(obstacleLocation)
+                new(obstacleLocation)
             };
             mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
             Position position = new(mockGrid.Object);

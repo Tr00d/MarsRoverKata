@@ -8,12 +8,12 @@ namespace MarsRoverKata.Domain.Grids
         public ObstacleException(Point obstacleLocation)
             : this()
         {
-            this.ObstacleLocation = obstacleLocation;
+            ObstacleLocation = obstacleLocation;
         }
 
         public ObstacleException()
         {
-            this.ObstacleLocation = new Point();
+            ObstacleLocation = new Point();
         }
 
         public Point ObstacleLocation { get; }

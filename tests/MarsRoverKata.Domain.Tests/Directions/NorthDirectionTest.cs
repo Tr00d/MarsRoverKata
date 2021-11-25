@@ -10,13 +10,11 @@ namespace MarsRoverKata.Domain.Tests.Directions
     public class NorthDirectionTest
     {
         private readonly NorthDirection direction;
-        private Fixture fixture;
         private readonly Mock<IPosition> mockPosition;
 
         public NorthDirectionTest()
         {
             direction = new NorthDirection();
-            fixture = new Fixture();
             mockPosition = new Mock<IPosition>();
         }
 

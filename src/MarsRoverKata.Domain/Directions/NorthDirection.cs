@@ -10,6 +10,6 @@ namespace MarsRoverKata.Domain.Directions
 
         public void MoveForward(IPosition position) => position.IncreaseY();
 
-        public string Cardinal { get; } = "N";
+        public string Cardinal => "N";
     }
 }

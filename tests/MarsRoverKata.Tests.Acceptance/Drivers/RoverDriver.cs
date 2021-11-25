@@ -30,6 +30,6 @@ namespace MarsRoverKata.Tests.Acceptance.Drivers
 
         public void InitializeObstacle(int x, int y) => grid.AddObstacle(new Obstacle(new Point(x, y)));
 
-        public bool HasObstacleWarning() => this.rover.HasObstacleWarning;
+        public bool HasObstacleWarning() => rover.HasObstacleWarning;
     }
 }

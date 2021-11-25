@@ -86,7 +86,7 @@ namespace MarsRoverKata.Domain.Tests
             mockState.Verify(state => state.RotateRight(), Times.Never);
             mockState.Verify(state => state.RotateLeft(), Times.Never);
         }
-        
+
         [Fact]
         public void Execute_ShouldPreventFurtherMovement_GivenStateProvideObstacleFeedback()
         {
