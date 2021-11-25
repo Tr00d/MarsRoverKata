@@ -1,4 +1,3 @@
-using System;
 using FluentAssertions;
 using MarsRoverKata.Tests.Acceptance.Drivers;
 using TechTalk.SpecFlow;
@@ -28,6 +27,6 @@ namespace MarsRoverKata.Tests.Acceptance.Steps
         public void VerifyYCoordinate(int coordinate) => driver.GetRoverYCoordinate().Should().Be(coordinate);
 
         [When(@"rover receives input ""(.*)""")]
-        public void SendInput(string input) => this.driver.SendInput(input);
+        public void SendInput(string input) => driver.SendInput(input);
     }
 }

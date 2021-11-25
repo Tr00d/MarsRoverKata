@@ -2,35 +2,32 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Dawn;
-using LanguageExt;
+using MarsRoverKata.Domain.States;
 
 namespace MarsRoverKata.Domain
 {
     public class Rover
     {
-        private Grid grid;
-        private IRoverState state;
+        private readonly Dictionary<char, Action> actions;
+        private readonly IState state;
 
-        public Rover(Grid grid, IRoverState state)
+        public Rover(IState state)
         {
-            this.grid = Guard.Argument(grid, nameof(grid)).NotNull().Value;
             this.state = Guard.Argument(state, nameof(state)).NotNull().Value;
-            this.actions = new Dictionary<char, Action>()
+            actions = new Dictionary<char, Action>
             {
-                { 'M', this.state.MoveForward },
-                { 'L', this.state.RotateLeft },
-                { 'R', this.state.RotateRight },
+                {'M', this.state.MoveForward},
+                {'L', this.state.RotateLeft},
+                {'R', this.state.RotateRight}
             };
         }
 
-        private readonly Dictionary<char, Action> actions;
+        public string Direction => state.GetDirection();
+
+        public int X => state.GetXCoordinate();
+
+        public int Y => state.GetYCoordinate();
 
         public void Execute(string input) => input.ToList().ForEach(command => actions[command]());
-
-        public string Direction => this.state.Direction.Cardinal;
-
-        public int X => this.state.Position.X;
-
-        public int Y => this.state.Position.Y;
     }
 }

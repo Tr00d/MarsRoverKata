@@ -1,13 +1,14 @@
+using MarsRoverKata.Domain.Positions;
+
 namespace MarsRoverKata.Domain.Directions
 {
     public interface IDirection
     {
+        string Cardinal { get; }
         IDirection GetLeftDirection();
 
         IDirection GetRightDirection();
 
-        RoverPosition MoveForward(RoverPosition position);
-        
-        string Cardinal { get; }
+        void MoveForward(IPosition position);
     }
 }

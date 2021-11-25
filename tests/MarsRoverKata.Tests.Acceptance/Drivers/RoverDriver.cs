@@ -1,5 +1,8 @@
-using LanguageExt;
 using MarsRoverKata.Domain;
+using MarsRoverKata.Domain.Directions;
+using MarsRoverKata.Domain.Grids;
+using MarsRoverKata.Domain.Positions;
+using MarsRoverKata.Domain.States;
 
 namespace MarsRoverKata.Tests.Acceptance.Drivers
 {
@@ -9,10 +12,10 @@ namespace MarsRoverKata.Tests.Acceptance.Drivers
 
         public void InitializeRover()
         {
-            this.rover = new Rover(new Grid(), new RoverState());
+            rover = new Rover(new State(new NorthDirection(), new Position(new Grid(10, 10))));
         }
 
-        public void SendInput(string input) => this.rover.Execute(input);
+        public void SendInput(string input) => rover.Execute(input);
 
         public string GetRoverDirection() => rover.Direction;
 

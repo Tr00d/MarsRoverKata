@@ -175,6 +175,58 @@ namespace MarsRoverKata.Tests.Acceptance.Features
             this.ScenarioCleanup();
         }
         
+        [Xunit.SkippableFactAttribute(DisplayName="Given a grid with no obstacles, input \"MMMMMMMMMM\" gives position 0:0 facing nort" +
+            "h (due to wrap-around)")]
+        [Xunit.TraitAttribute("FeatureTitle", "Rover")]
+        [Xunit.TraitAttribute("Description", "Given a grid with no obstacles, input \"MMMMMMMMMM\" gives position 0:0 facing nort" +
+            "h (due to wrap-around)")]
+        [Xunit.TraitAttribute("Category", "Acceptance")]
+        public virtual void GivenAGridWithNoObstaclesInputMMMMMMMMMMGivesPosition00FacingNorthDueToWrap_Around()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "Acceptance"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Given a grid with no obstacles, input \"MMMMMMMMMM\" gives position 0:0 facing nort" +
+                    "h (due to wrap-around)", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 20
+    this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 21
+        testRunner.Given("rover is initialized", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 22
+        testRunner.When("rover receives input \"MMMMMMMMMM\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 23
+        testRunner.Then("the X coordinate should be 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 24
+        testRunner.And("the Y coordinate should be 0", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 25
+        testRunner.And("the direction should be \"N\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

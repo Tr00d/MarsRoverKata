@@ -1,3 +1,5 @@
+using MarsRoverKata.Domain.Positions;
+
 namespace MarsRoverKata.Domain.Directions
 {
     public class NorthDirection : IDirection
@@ -6,7 +8,7 @@ namespace MarsRoverKata.Domain.Directions
 
         public IDirection GetRightDirection() => new EastDirection();
 
-        public RoverPosition MoveForward(RoverPosition position) => new RoverPosition(position.X, position.Y + 1);
+        public void MoveForward(IPosition position) => position.IncreaseY();
 
         public string Cardinal { get; } = "N";
     }

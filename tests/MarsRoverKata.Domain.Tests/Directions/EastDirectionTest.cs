@@ -1,18 +1,23 @@
 using AutoFixture;
 using FluentAssertions;
 using MarsRoverKata.Domain.Directions;
+using MarsRoverKata.Domain.Positions;
+using Moq;
 using Xunit;
 
 namespace MarsRoverKata.Domain.Tests.Directions
 {
     public class EastDirectionTest
     {
+        private readonly EastDirection direction;
         private Fixture fixture;
-        private EastDirection direction;
+        private readonly Mock<IPosition> mockPosition;
+
         public EastDirectionTest()
         {
-            this.direction = new EastDirection();
-            this.fixture = new Fixture();
+            direction = new EastDirection();
+            mockPosition = new Mock<IPosition>();
+            fixture = new Fixture();
         }
 
         [Fact]
@@ -33,12 +38,10 @@ namespace MarsRoverKata.Domain.Tests.Directions
         }
 
         [Fact]
-        public void MoveForward_ShouldReturnPositionWithIncreasedXCoordinate()
+        public void MoveForward_ShouldIncreaseXCoordinate()
         {
-            RoverPosition position = this.fixture.Create<RoverPosition>();
-            RoverPosition result = direction.MoveForward(position);
-            result.Y.Should().Be(position.Y);
-            result.X.Should().Be(position.X + 1);
+            direction.MoveForward(mockPosition.Object);
+            mockPosition.Verify(position => position.IncreaseX(), Times.Once);
         }
     }
 }
