@@ -1,6 +1,17 @@
-# MarsRoverKata
+# Introduction
 
-### Instructions
+This is my take on the Mars Rover Kata.
+
+I took the liberty to adjust the IO of the rover class. Instead of having a method "string Execute(string)", I separated the logic into a "void Execute(string)" method and three methods to retrieve the status of the rover (direction, x&y coordinates). It doesn't change much to the kata to be honest, but I try to always respect CQS.
+
+I followed the Outside-In TDD approach and mockist methodology, starting from acceptance testing until low-level tests. 
+Still, I realized halfway-through that my design for handling directions was lacking flexibility for further evolutions so I had to do quite some refactoring.
+
+# Mars Rover Kata
+
+The exercise's description has been copied/pasted from another source, I didn't change anything.
+
+### Kata Instructions
 
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars.
 
