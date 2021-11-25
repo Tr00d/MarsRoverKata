@@ -32,3 +32,4 @@ A mars rover that navigates on a grid.
         Then the X coordinate should be 0
         And the Y coordinate should be 2
         And the direction should be "N"
+        And the rover provides an obstacle warning

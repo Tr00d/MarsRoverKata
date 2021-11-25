@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Dawn;
+using MarsRoverKata.Domain.Grids;
 using MarsRoverKata.Domain.States;
 
 namespace MarsRoverKata.Domain
@@ -27,7 +28,26 @@ namespace MarsRoverKata.Domain
         public int X => state.GetXCoordinate();
 
         public int Y => state.GetYCoordinate();
+        
+        public bool HasObstacleWarning { get; private set; }
 
-        public void Execute(string input) => input.ToList().ForEach(command => actions[command]());
+        public void Execute(string input) => input.ToList().ForEach(this.ExecuteCommand);
+
+        private void ExecuteCommand(char command)
+        {
+            if (this.HasObstacleWarning)
+            {
+                return;
+            }
+            
+            try
+            {
+                actions[command]();
+            }
+            catch (ObstacleException exception)
+            {
+                this.HasObstacleWarning = true;
+            }
+        }
     }
 }

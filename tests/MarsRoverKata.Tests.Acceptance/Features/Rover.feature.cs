@@ -278,6 +278,9 @@ namespace MarsRoverKata.Tests.Acceptance.Features
 #line 34
         testRunner.And("the direction should be \"N\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
+#line 35
+        testRunner.And("the rover provides an obstacle warning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

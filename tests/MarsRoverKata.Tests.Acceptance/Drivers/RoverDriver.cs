@@ -9,11 +9,15 @@ namespace MarsRoverKata.Tests.Acceptance.Drivers
 {
     public class RoverDriver
     {
+        private Grid grid;
         private Rover rover;
+        private State state;
 
         public void InitializeRover()
         {
-            rover = new Rover(new State(new NorthDirection(), new Position(new Grid(new Point(10, 10)))));
+            grid = new Grid(new Point(10, 10));
+            state = new State(new NorthDirection(), new Position(grid));
+            rover = new Rover(state);
         }
 
         public void SendInput(string input) => rover.Execute(input);
@@ -24,9 +28,8 @@ namespace MarsRoverKata.Tests.Acceptance.Drivers
 
         public int GetRoverYCoordinate() => rover.Y;
 
-        public void InitializeObstacle(int x, int y)
-        {
-            
-        }
+        public void InitializeObstacle(int x, int y) => grid.AddObstacle(new Obstacle(new Point(x, y)));
+
+        public bool HasObstacleWarning() => this.rover.HasObstacleWarning;
     }
 }

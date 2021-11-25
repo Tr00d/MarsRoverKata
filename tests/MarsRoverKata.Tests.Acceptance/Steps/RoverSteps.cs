@@ -30,7 +30,9 @@ namespace MarsRoverKata.Tests.Acceptance.Steps
         public void SendInput(string input) => driver.SendInput(input);
 
         [Given(@"obstacle stands at ""(.*)"":""(.*)""")]
-        public void InitializeObstacle(string x, string y) =>
-            this.driver.InitializeObstacle(int.Parse(x), int.Parse(y));
+        public void InitializeObstacle(string x, string y) => this.driver.InitializeObstacle(int.Parse(x), int.Parse(y));
+
+        [Then(@"the rover provides an obstacle warning")]
+        public void ThenTheRoverProvidesAnObstacleWarning() => this.driver.HasObstacleWarning().Should().Be(true);
     }
 }
