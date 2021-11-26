@@ -1,5 +1,7 @@
 # Introduction
 
+[![BCH compliance](https://bettercodehub.com/edge/badge/Tr00d/MarsRoverKata?branch=main)](https://bettercodehub.com/)
+
 This is my take on the Mars Rover Kata.
 
 I took the liberty to adjust the IO of the rover class. Instead of having a method "string Execute(string)", I separated
