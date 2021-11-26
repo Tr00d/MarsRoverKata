@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using System.Drawing;
 using MarsRoverKata.Domain;
+using MarsRoverKata.Domain.Commands;
 using MarsRoverKata.Domain.Directions;
 using MarsRoverKata.Domain.Grids;
 using MarsRoverKata.Domain.Positions;
@@ -17,7 +19,8 @@ namespace MarsRoverKata.Tests.Acceptance.Drivers
         {
             grid = new Grid(new Point(10, 10));
             state = new State(new NorthDirection(), new Position(grid));
-            rover = new Rover(state);
+            rover = new Rover(state,
+                new List<IInputCommand> {new MoveForwardCommand(), new RotateLeftCommand(), new RotateRightCommand()});
         }
 
         public void SendInput(string input) => rover.Execute(input);

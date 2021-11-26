@@ -1,5 +1,7 @@
 # Introduction
 
+Here's the rating on BetterCodeHub. The rating is 9/10 because everything is one assembly but being a kata, I did not created layers.
+
 [![BCH compliance](https://bettercodehub.com/edge/badge/Tr00d/MarsRoverKata?branch=main)](https://bettercodehub.com/)
 
 This is my take on the Mars Rover Kata.
