@@ -1,4 +1,5 @@
 # Introduction
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Tr00d_MarsRoverKata&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Tr00d_MarsRoverKata)
 
 Here's the rating on BetterCodeHub. The rating is 9/10 because everything is one assembly but being a kata, I did not created layers.
 
