@@ -6,7 +6,7 @@ namespace MarsRoverKata.Domain.Grids
     {
         public Obstacle(Point location)
         {
-            Location = location;
+            this.Location = location;
         }
 
         public Point Location { get; }

@@ -16,29 +16,29 @@ namespace MarsRoverKata.Domain.Tests.Positions
 
         public PositionTest()
         {
-            fixture = new Fixture();
-            mockGrid = new Mock<IGrid>();
-            mockGrid.SetupGet(grid => grid.MaxPoint).Returns(new Point(5, 5));
+            this.fixture = new Fixture();
+            this.mockGrid = new Mock<IGrid>();
+            this.mockGrid.SetupGet(grid => grid.MaxPoint).Returns(new Point(5, 5));
         }
 
         [Fact]
         public void X_ShouldReturnZero_GivenPositionIsDefault()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             position.Location.X.Should().Be(0);
         }
 
         [Fact]
         public void Y_ShouldReturnZero_GivenPositionIsDefault()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             position.Location.Y.Should().Be(0);
         }
 
         [Fact]
         public void IncreaseX_ShouldIncreaseXValue()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             int initialPosition = position.Location.X;
             position.IncreaseX();
             position.Location.X.Should().Be(++initialPosition);
@@ -50,10 +50,10 @@ namespace MarsRoverKata.Domain.Tests.Positions
             Point obstacleLocation = new Point(1, 0);
             IEnumerable<Obstacle> obstacles = new List<Obstacle>
             {
-                new(obstacleLocation)
+                new(obstacleLocation),
             };
-            mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
-            Position position = new(mockGrid.Object);
+            this.mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
+            Position position = new(this.mockGrid.Object);
             ObstacleException exception = Assert.Throws<ObstacleException>(() => position.IncreaseX());
             exception.ObstacleLocation.Should().Be(obstacleLocation);
         }
@@ -61,7 +61,7 @@ namespace MarsRoverKata.Domain.Tests.Positions
         [Fact]
         public void IncreaseX_ShouldSetZero_GivenXWasGridLimit()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             position.IncreaseX();
             position.IncreaseX();
             position.IncreaseX();
@@ -73,7 +73,7 @@ namespace MarsRoverKata.Domain.Tests.Positions
         [Fact]
         public void IncreaseY_ShouldIncreaseYValue()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             int initialPosition = position.Location.Y;
             position.IncreaseY();
             position.Location.Y.Should().Be(++initialPosition);
@@ -85,10 +85,10 @@ namespace MarsRoverKata.Domain.Tests.Positions
             Point obstacleLocation = new Point(0, 1);
             IEnumerable<Obstacle> obstacles = new List<Obstacle>
             {
-                new(obstacleLocation)
+                new(obstacleLocation),
             };
-            mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
-            Position position = new(mockGrid.Object);
+            this.mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
+            Position position = new(this.mockGrid.Object);
             ObstacleException exception = Assert.Throws<ObstacleException>(() => position.IncreaseY());
             exception.ObstacleLocation.Should().Be(obstacleLocation);
         }
@@ -96,7 +96,7 @@ namespace MarsRoverKata.Domain.Tests.Positions
         [Fact]
         public void IncreaseY_ShouldSetZero_GivenYWasGridLimit()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             position.IncreaseY();
             position.IncreaseY();
             position.IncreaseY();
@@ -108,7 +108,7 @@ namespace MarsRoverKata.Domain.Tests.Positions
         [Fact]
         public void DecreaseX_ShouldDecreaseXValue()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             position.IncreaseX();
             int initialPosition = position.Location.X;
             position.DecreaseX();
@@ -121,10 +121,10 @@ namespace MarsRoverKata.Domain.Tests.Positions
             Point obstacleLocation = new Point(0, 0);
             IEnumerable<Obstacle> obstacles = new List<Obstacle>
             {
-                new(obstacleLocation)
+                new(obstacleLocation),
             };
-            mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
-            Position position = new(mockGrid.Object);
+            this.mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
+            Position position = new(this.mockGrid.Object);
             position.IncreaseX();
             ObstacleException exception = Assert.Throws<ObstacleException>(() => position.DecreaseX());
             exception.ObstacleLocation.Should().Be(obstacleLocation);
@@ -133,15 +133,15 @@ namespace MarsRoverKata.Domain.Tests.Positions
         [Fact]
         public void DecreaseX_ShouldMaxX_GivenXWasGridLimit()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             position.DecreaseX();
-            position.Location.X.Should().Be(mockGrid.Object.MaxPoint.X - 1);
+            position.Location.X.Should().Be(this.mockGrid.Object.MaxPoint.X - 1);
         }
 
         [Fact]
         public void DecreaseY_ShouldDecreaseYValue()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             position.IncreaseY();
             int initialPosition = position.Location.Y;
             position.DecreaseY();
@@ -154,10 +154,10 @@ namespace MarsRoverKata.Domain.Tests.Positions
             Point obstacleLocation = new Point(0, 0);
             IEnumerable<Obstacle> obstacles = new List<Obstacle>
             {
-                new(obstacleLocation)
+                new(obstacleLocation),
             };
-            mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
-            Position position = new(mockGrid.Object);
+            this.mockGrid.Setup(grid => grid.Obstacles).Returns(obstacles);
+            Position position = new(this.mockGrid.Object);
             position.IncreaseY();
             ObstacleException exception = Assert.Throws<ObstacleException>(() => position.DecreaseY());
             exception.ObstacleLocation.Should().Be(obstacleLocation);
@@ -166,9 +166,9 @@ namespace MarsRoverKata.Domain.Tests.Positions
         [Fact]
         public void DecreaseY_ShouldMaxY_GivenYWasGridLimit()
         {
-            Position position = new(mockGrid.Object);
+            Position position = new(this.mockGrid.Object);
             position.DecreaseY();
-            position.Location.Y.Should().Be(mockGrid.Object.MaxPoint.Y - 1);
+            position.Location.Y.Should().Be(this.mockGrid.Object.MaxPoint.Y - 1);
         }
     }
 }
