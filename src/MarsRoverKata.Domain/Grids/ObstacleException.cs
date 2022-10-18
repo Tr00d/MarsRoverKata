@@ -1,4 +1,3 @@
-using System;
 using System.Drawing;
 
 namespace MarsRoverKata.Domain.Grids
@@ -8,12 +7,12 @@ namespace MarsRoverKata.Domain.Grids
         public ObstacleException(Point obstacleLocation)
             : this()
         {
-            ObstacleLocation = obstacleLocation;
+            this.ObstacleLocation = obstacleLocation;
         }
 
         public ObstacleException()
         {
-            ObstacleLocation = new Point();
+            this.ObstacleLocation = new Point();
         }
 
         public Point ObstacleLocation { get; }

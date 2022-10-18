@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Dawn;
-using LanguageExt;
 using MarsRoverKata.Domain.Commands;
 using MarsRoverKata.Domain.Grids;
 using MarsRoverKata.Domain.States;
@@ -11,8 +7,8 @@ namespace MarsRoverKata.Domain
 {
     public class Rover
     {
-        private readonly IState state;
         private readonly IEnumerable<IInputCommand> inputCommands;
+        private readonly IState state;
 
         public Rover(IState state, IEnumerable<IInputCommand> inputCommands)
         {
@@ -20,30 +16,32 @@ namespace MarsRoverKata.Domain
             this.inputCommands = inputCommands;
         }
 
-        public string Direction => state.GetDirection();
+        public string Direction => this.state.GetDirection();
 
-        public int X => state.GetXCoordinate();
+        public int X => this.state.GetXCoordinate();
 
-        public int Y => state.GetYCoordinate();
+        public int Y => this.state.GetYCoordinate();
 
         public bool HasObstacleWarning { get; private set; }
 
-        public void Execute(string input) => input.ToList().ForEach(ExecuteCommand);
+        public void Execute(string input) => input.ToList().ForEach(this.ExecuteCommand);
 
         private void ExecuteCommand(char command)
         {
-            if (HasObstacleWarning || !inputCommands.Any(inputCommand => inputCommand.CanExecuteInput(command)))
+            if (this.HasObstacleWarning ||
+                !this.inputCommands.Any(inputCommand => inputCommand.CanExecuteInput(command)))
             {
                 return;
             }
 
             try
             {
-                inputCommands.First(inputCommand => inputCommand.CanExecuteInput(command)).ExecuteCommand(this.state);
+                this.inputCommands.First(inputCommand => inputCommand.CanExecuteInput(command))
+                    .ExecuteCommand(this.state);
             }
             catch (ObstacleException)
             {
-                HasObstacleWarning = true;
+                this.HasObstacleWarning = true;
             }
         }
     }

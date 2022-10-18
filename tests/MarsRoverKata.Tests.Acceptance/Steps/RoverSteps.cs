@@ -15,25 +15,25 @@ namespace MarsRoverKata.Tests.Acceptance.Steps
         }
 
         [Given(@"rover is initialized")]
-        public void InitializeRover() => driver.InitializeRover();
+        public void InitializeRover() => this.driver.InitializeRover();
 
         [Then(@"the direction should be ""(.*)""")]
-        public void VerifyDirection(string direction) => driver.GetRoverDirection().Should().Be(direction);
+        public void VerifyDirection(string direction) => this.driver.GetRoverDirection().Should().Be(direction);
 
         [Then(@"the X coordinate should be (.*)")]
-        public void VerifyXCoordinate(int coordinate) => driver.GetRoverXCoordinate().Should().Be(coordinate);
+        public void VerifyXCoordinate(int coordinate) => this.driver.GetRoverXCoordinate().Should().Be(coordinate);
 
         [Then(@"the Y coordinate should be (.*)")]
-        public void VerifyYCoordinate(int coordinate) => driver.GetRoverYCoordinate().Should().Be(coordinate);
+        public void VerifyYCoordinate(int coordinate) => this.driver.GetRoverYCoordinate().Should().Be(coordinate);
 
         [When(@"rover receives input ""(.*)""")]
-        public void SendInput(string input) => driver.SendInput(input);
+        public void SendInput(string input) => this.driver.SendInput(input);
 
         [Given(@"obstacle stands at ""(.*)"":""(.*)""")]
         public void InitializeObstacle(string x, string y) =>
-            driver.InitializeObstacle(int.Parse(x), int.Parse(y));
+            this.driver.InitializeObstacle(int.Parse(x), int.Parse(y));
 
         [Then(@"the rover provides an obstacle warning")]
-        public void ThenTheRoverProvidesAnObstacleWarning() => driver.HasObstacleWarning().Should().Be(true);
+        public void ThenTheRoverProvidesAnObstacleWarning() => this.driver.HasObstacleWarning().Should().Be(true);
     }
 }

@@ -1,5 +1,4 @@
 using System.Drawing;
-using System.Linq;
 using MarsRoverKata.Domain.Grids;
 
 namespace MarsRoverKata.Domain.Positions
@@ -11,28 +10,34 @@ namespace MarsRoverKata.Domain.Positions
         public Position(IGrid grid)
         {
             this.grid = grid;
-            Location = new Point(0, 0);
+            this.Location = new Point(0, 0);
         }
 
         public Point Location { get; private set; }
 
-        public void IncreaseX() =>
-            UpdateLocation(new Point(Location.X == grid.MaxPoint.X - 1 ? 0 : Location.X + 1,
-                Location.Y));
+        public void IncreaseX() => this.UpdateLocation(this.Location with
+        {
+            X = this.Location.X == this.grid.MaxPoint.X - 1 ? 0 : this.Location.X + 1,
+        });
 
-        public void IncreaseY() => UpdateLocation(new Point(Location.X,
-            Location.Y == grid.MaxPoint.Y - 1 ? 0 : Location.Y + 1));
+        public void IncreaseY() => this.UpdateLocation(this.Location with
+        {
+            Y = this.Location.Y == this.grid.MaxPoint.Y - 1 ? 0 : this.Location.Y + 1,
+        });
 
-        public void DecreaseX() =>
-            UpdateLocation(new Point(Location.X == 0 ? grid.MaxPoint.X - 1 : Location.X - 1,
-                Location.Y));
+        public void DecreaseX() => this.UpdateLocation(this.Location with
+        {
+            X = this.Location.X == 0 ? this.grid.MaxPoint.X - 1 : this.Location.X - 1,
+        });
 
-        public void DecreaseY() => UpdateLocation(Location = new Point(Location.X,
-            Location.Y == 0 ? grid.MaxPoint.Y - 1 : Location.Y - 1));
+        public void DecreaseY() => this.UpdateLocation(this.Location with
+        {
+            Y = this.Location.Y == 0 ? this.grid.MaxPoint.Y - 1 : this.Location.Y - 1,
+        });
 
         private void UpdateLocation(Point location)
         {
-            Location = grid.Obstacles.All(obstacle => obstacle.Location != location)
+            this.Location = this.grid.Obstacles.All(obstacle => obstacle.Location != location)
                 ? location
                 : throw new ObstacleException(location);
         }

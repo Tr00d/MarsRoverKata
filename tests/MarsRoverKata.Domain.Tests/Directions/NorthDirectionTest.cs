@@ -1,4 +1,3 @@
-using AutoFixture;
 using FluentAssertions;
 using MarsRoverKata.Domain.Directions;
 using MarsRoverKata.Domain.Positions;
@@ -14,32 +13,32 @@ namespace MarsRoverKata.Domain.Tests.Directions
 
         public NorthDirectionTest()
         {
-            direction = new NorthDirection();
-            mockPosition = new Mock<IPosition>();
+            this.direction = new NorthDirection();
+            this.mockPosition = new Mock<IPosition>();
         }
 
         [Fact]
-        public void Cardinal_ShouldReturnN() => direction.Cardinal.Should().Be("N");
+        public void Cardinal_ShouldReturnN() => this.direction.Cardinal.Should().Be("N");
 
         [Fact]
         public void GetLeftDirection_ShouldReturnWestDirection()
         {
-            IDirection westDirection = direction.GetLeftDirection();
+            IDirection westDirection = this.direction.GetLeftDirection();
             westDirection.Should().BeOfType<WestDirection>();
         }
 
         [Fact]
         public void GetRightDirection_ShouldReturnEastDirection()
         {
-            IDirection eastDirection = direction.GetRightDirection();
+            IDirection eastDirection = this.direction.GetRightDirection();
             eastDirection.Should().BeOfType<EastDirection>();
         }
 
         [Fact]
         public void MoveForward_ShouldIncreaseYCoordinate()
         {
-            direction.MoveForward(mockPosition.Object);
-            mockPosition.Verify(position => position.IncreaseY(), Times.Once);
+            this.direction.MoveForward(this.mockPosition.Object);
+            this.mockPosition.Verify(position => position.IncreaseY(), Times.Once);
         }
     }
 }

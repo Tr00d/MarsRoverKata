@@ -16,17 +16,17 @@ namespace MarsRoverKata.Domain.Tests.States
 
         public StateTest()
         {
-            fixture = new Fixture();
-            mockDirection = new Mock<IDirection>();
-            mockPosition = new Mock<IPosition>();
+            this.fixture = new Fixture();
+            this.mockDirection = new Mock<IDirection>();
+            this.mockPosition = new Mock<IPosition>();
         }
 
         [Fact]
         public void RotateLeft_ShouldModifyDirectionToLeftDirection()
         {
             IDirection leftDirection = new Mock<IDirection>().Object;
-            mockDirection.Setup(direction => direction.GetLeftDirection()).Returns(leftDirection);
-            State state = new(mockDirection.Object, mockPosition.Object);
+            this.mockDirection.Setup(direction => direction.GetLeftDirection()).Returns(leftDirection);
+            State state = new(this.mockDirection.Object, this.mockPosition.Object);
             state.RotateLeft();
             state.GetDirection().Should().Be(leftDirection.Cardinal);
         }
@@ -35,8 +35,8 @@ namespace MarsRoverKata.Domain.Tests.States
         public void RotateLeft_ShouldModifyDirectionToRightDirection()
         {
             IDirection rightDirection = new Mock<IDirection>().Object;
-            mockDirection.Setup(direction => direction.GetRightDirection()).Returns(rightDirection);
-            State state = new(mockDirection.Object, mockPosition.Object);
+            this.mockDirection.Setup(direction => direction.GetRightDirection()).Returns(rightDirection);
+            State state = new(this.mockDirection.Object, this.mockPosition.Object);
             state.RotateRight();
             state.GetDirection().Should().Be(rightDirection.Cardinal);
         }
@@ -44,9 +44,9 @@ namespace MarsRoverKata.Domain.Tests.States
         [Fact]
         public void MoveForward_ShouldUpdateCoordinate()
         {
-            State state = new(mockDirection.Object, mockPosition.Object);
+            State state = new(this.mockDirection.Object, this.mockPosition.Object);
             state.MoveForward();
-            mockDirection.Verify(direction => direction.MoveForward(mockPosition.Object), Times.Once);
+            this.mockDirection.Verify(direction => direction.MoveForward(this.mockPosition.Object), Times.Once);
         }
     }
 }

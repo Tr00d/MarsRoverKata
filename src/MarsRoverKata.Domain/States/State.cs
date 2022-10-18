@@ -15,16 +15,16 @@ namespace MarsRoverKata.Domain.States
             this.position = Guard.Argument(position, nameof(position)).NotNull().Value;
         }
 
-        public void RotateLeft() => direction = direction.GetLeftDirection();
+        public void RotateLeft() => this.direction = this.direction.GetLeftDirection();
 
-        public void RotateRight() => direction = direction.GetRightDirection();
+        public void RotateRight() => this.direction = this.direction.GetRightDirection();
 
-        public void MoveForward() => direction.MoveForward(position);
+        public void MoveForward() => this.direction.MoveForward(this.position);
 
-        public string GetDirection() => direction.Cardinal;
+        public string GetDirection() => this.direction.Cardinal;
 
-        public int GetXCoordinate() => position.Location.X;
+        public int GetXCoordinate() => this.position.Location.X;
 
-        public int GetYCoordinate() => position.Location.Y;
+        public int GetYCoordinate() => this.position.Location.Y;
     }
 }

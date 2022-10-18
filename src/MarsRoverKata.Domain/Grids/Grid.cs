@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace MarsRoverKata.Domain.Grids
@@ -9,14 +8,14 @@ namespace MarsRoverKata.Domain.Grids
 
         public Grid(Point maxPoint)
         {
-            MaxPoint = maxPoint;
-            obstacles = new List<Obstacle>();
+            this.MaxPoint = maxPoint;
+            this.obstacles = new List<Obstacle>();
         }
 
         public Point MaxPoint { get; }
 
-        public IEnumerable<Obstacle> Obstacles => new List<Obstacle>(obstacles);
+        public IEnumerable<Obstacle> Obstacles => new List<Obstacle>(this.obstacles);
 
-        public void AddObstacle(Obstacle obstacle) => obstacles.Add(obstacle);
+        public void AddObstacle(Obstacle obstacle) => this.obstacles.Add(obstacle);
     }
 }

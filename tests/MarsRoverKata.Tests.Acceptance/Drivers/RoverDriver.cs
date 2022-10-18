@@ -17,22 +17,22 @@ namespace MarsRoverKata.Tests.Acceptance.Drivers
 
         public void InitializeRover()
         {
-            grid = new Grid(new Point(10, 10));
-            state = new State(new NorthDirection(), new Position(grid));
-            rover = new Rover(state,
+            this.grid = new Grid(new Point(10, 10));
+            this.state = new State(new NorthDirection(), new Position(this.grid));
+            this.rover = new Rover(this.state,
                 new List<IInputCommand> {new MoveForwardCommand(), new RotateLeftCommand(), new RotateRightCommand()});
         }
 
-        public void SendInput(string input) => rover.Execute(input);
+        public void SendInput(string input) => this.rover.Execute(input);
 
-        public string GetRoverDirection() => rover.Direction;
+        public string GetRoverDirection() => this.rover.Direction;
 
-        public int GetRoverXCoordinate() => rover.X;
+        public int GetRoverXCoordinate() => this.rover.X;
 
-        public int GetRoverYCoordinate() => rover.Y;
+        public int GetRoverYCoordinate() => this.rover.Y;
 
-        public void InitializeObstacle(int x, int y) => grid.AddObstacle(new Obstacle(new Point(x, y)));
+        public void InitializeObstacle(int x, int y) => this.grid.AddObstacle(new Obstacle(new Point(x, y)));
 
-        public bool HasObstacleWarning() => rover.HasObstacleWarning;
+        public bool HasObstacleWarning() => this.rover.HasObstacleWarning;
     }
 }
